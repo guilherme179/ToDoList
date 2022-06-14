@@ -1,14 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal } from 'react-native';
 import {AntDesign} from '@expo/vector-icons';
 import cores from './Cores';
 import dadosTemp from './dadosTemp';
 import TodoList from './componentes/TodoList';
+import AddListModal from './componentes/AddListModal';
 
 export default class App extends React.Component{
+  state = {
+    addTodoVisivel : false
+  }
+
+  toggleAddTodoModal() {
+    this.setState({addTodoVisivel: !this.state.addTodoVisivel})
+  }
   render(){
     return (
       <View style={styles.container}>
+        <Modal animationType='slide' visible={this.state.addTodoVisivel} onRequestClose={() => this.toggleAddTodoModal()}>
+          <AddListModal closeModal={() => this.toggleAddTodoModal()}/>
+        </Modal>
         <View style={{flexDirection: "row"}}>
           <View style={styles.divisor} />
           <Text style={styles.titulo}>
@@ -18,14 +29,14 @@ export default class App extends React.Component{
         </View>
 
         <View style={{marginVertical: 48}}>
-          <TouchableOpacity style={styles.addLista}>
+          <TouchableOpacity style={styles.addLista} onPress={() => this.toggleAddTodoModal()}>
             <AntDesign name='plus' size={16} color={cores.azul}/>
           </TouchableOpacity>
 
           <Text style={styles.add}>Add Lista</Text>
         </View>
 
-        <View style={{height: 275,  paddingLeft: 32, alignSelf: 'center'}}>
+        <View style={{height: 275,  paddingHorizontal: 18, alignSelf: 'center'}}>
           <FlatList 
             data={dadosTemp} 
             keyExtractor={item => item.name} 
