@@ -1,5 +1,6 @@
 const dadosTemp = [
     {
+        id: 1,
         name: "Terminar o projeto",
         color: "#24A6D9",
         todos: [
@@ -18,6 +19,7 @@ const dadosTemp = [
         ]
     },
     {
+        id: 2,
         name: "Apenas enfeite",
         color: "#8022D9",
         todos: [
@@ -40,6 +42,7 @@ const dadosTemp = [
         ]
     },
     {
+        id: 3,
         name: "Encheção de linguiça",
         color: "#595BD9",
         todos: [

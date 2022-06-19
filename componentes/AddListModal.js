@@ -14,13 +14,11 @@ export default class AddListModal extends React.Component {
     }
 
     createTodo = () => {
-        const {name, color} = this.state
+        const {name, color} = this.state;
 
-        dadosTemp.push({
-            name,
-            color,
-            todos: []
-        });
+        const list = {name, color};
+
+        this.props.addList(list);
 
         this.setState({nme : ''});
         this.props.closeModal();

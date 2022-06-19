@@ -8,7 +8,8 @@ import AddListModal from './componentes/AddListModal';
 
 export default class App extends React.Component{
   state = {
-    addTodoVisivel : false
+    addTodoVisivel : false,
+    lists: dadosTemp
   }
 
   toggleAddTodoModal() {
@@ -16,14 +17,26 @@ export default class App extends React.Component{
   }
 
   renderList = list =>{
-    return <TodoList list={list} />
+    return <TodoList list={list} updateList={this.updateList} />
   }
+
+  addList = list => {
+    this.setState({lists: [...this.state.lists, { ...list, id: this.state.lists.length + 1, todos: [] }] });
+  }
+
+  updateList = list => {
+    this.setState({
+      lists: this.state.lists.map(item => {
+        return item.id === list.id ? list : item
+      })
+    })
+  };
 
   render(){
     return (
       <View style={styles.container}>
         <Modal animationType='slide' visible={this.state.addTodoVisivel} onRequestClose={() => this.toggleAddTodoModal()}>
-          <AddListModal closeModal={() => this.toggleAddTodoModal()}/>
+          <AddListModal closeModal={() => this.toggleAddTodoModal()} addList={this.addList}/>
         </Modal>
         <View style={{flexDirection: "row"}}>
           <View style={styles.divisor} />
@@ -43,11 +56,13 @@ export default class App extends React.Component{
 
         <View style={{height: 275,  paddingHorizontal: 18, alignSelf: 'center'}}>
           <FlatList 
-            data={dadosTemp} 
+            data={this.state.lists} 
             keyExtractor={item => item.name} 
             horizontal={true} 
             showsHorizontalScrollIndicator={false} 
-            renderItem={({item}) => this.renderList(item)}/>
+            renderItem={({item}) => this.renderList(item)}
+            keyboardShouldPersistTaps = "always"
+            />
         </View>
       </View>
     );
