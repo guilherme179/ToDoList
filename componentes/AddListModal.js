@@ -3,6 +3,8 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import cores from "../Cores";
 import {AntDesign} from '@expo/vector-icons';
 import dadosTemp from "../dadosTemp";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from "react-native-uuid";
 
 export default class AddListModal extends React.Component {
 
@@ -13,14 +15,22 @@ export default class AddListModal extends React.Component {
         color: this.backgroundColors[0]
     }
 
-    createTodo = () => {
+    createTodo = async() => {
+    
         const {name, color} = this.state;
-
+        
         const list = {name, color};
-
-        this.props.addList(list);
-
-        this.setState({nme : ''});
+        
+        //this.props.addList(list);
+        
+        //this.setState({name : ''});
+        
+        try {
+            await AsyncStorage.setItem(uuid.v4(), list);
+        } catch (error) {
+            alert(error);
+        }
+        
         this.props.closeModal();
     }
 
