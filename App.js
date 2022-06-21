@@ -5,7 +5,19 @@ import cores from './Cores';
 import dadosTemp from './dadosTemp';
 import TodoList from './componentes/TodoList';
 import AddListModal from './componentes/AddListModal';
-import Fire from './Fire';
+import {initializeApp} from 'firebase/app';
+import '@firebase/firestore';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBX-zOsLCHpTmsgay6hfMNnwlhGQAHMcZ4",
+    authDomain: "todolist-3bdf0.firebaseapp.com",
+    projectId: "todolist-3bdf0",
+    storageBucket: "todolist-3bdf0.appspot.com",
+    messagingSenderId: "237579960933",
+    appId: "1:237579960933:web:b3ae03d9b29ef729f6fc8c"
+}
+
+const app = initializeApp(firebaseConfig);
 
 export default class App extends React.Component{
   state = {

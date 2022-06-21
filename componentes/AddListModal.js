@@ -3,7 +3,6 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import cores from "../Cores";
 import {AntDesign} from '@expo/vector-icons';
 
-
 export default class AddListModal extends React.Component {
 
     backgroundColors = ["#24A6D9", "#5CD859", "#595BD9", "#8022D9", "#D159D8", "#D85963", "#D88559"]
