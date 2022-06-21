@@ -5,6 +5,7 @@ import cores from './Cores';
 import dadosTemp from './dadosTemp';
 import TodoList from './componentes/TodoList';
 import AddListModal from './componentes/AddListModal';
+import Fire from './Fire';
 
 export default class App extends React.Component{
   state = {
