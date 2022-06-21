@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
+        paddingRight: 100,
         fontWeight: "800",
         color: cores.preto
     },
