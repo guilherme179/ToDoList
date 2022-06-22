@@ -2,7 +2,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import home from './home';
 import sobre from './sobre/Index';
 
@@ -31,8 +30,8 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Sobre" component={sobre}/>
         <Tab.Screen name="Home" component={home} />
+        <Tab.Screen name="Sobre" component={sobre}/>
       </Tab.Navigator>
     </NavigationContainer>
   )
