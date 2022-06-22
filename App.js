@@ -31,8 +31,8 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={home} />
         <Tab.Screen name="Sobre" component={sobre}/>
+        <Tab.Screen name="Home" component={home} />
       </Tab.Navigator>
     </NavigationContainer>
   )
