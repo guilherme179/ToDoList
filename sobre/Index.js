@@ -24,7 +24,6 @@ export default function Sobre(){
                     </Text>
                 </View>
                 <View style={{marginTop: 45, marginBottom: 15}}>
-                    <Image style={{ marginLeft: 5, width: 200, height: 200, borderRadius: 5}} source={require('../assets/guilherme.jpg')}/>
                     <Text style={styles.name}>Matheus: </Text>
                     <Text style={[styles.content, {marginTop: 15}]} onPress={() => { Linking.openURL('https://github.com/matheus-felipe-c') }}>
                         <Ionicons name={"logo-github"} size={24} style={{width: 32, marginRight: 5}}/>
