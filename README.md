@@ -29,3 +29,10 @@ Aqui veremos a tela de modal para adicionar novas tarefas:
 
 E aqui a tela inicial atualizada após a marcação das tarefas feitas:
 [tela inicial 4](https://user-images.githubusercontent.com/83122773/175105272-b183444a-8c17-450f-ad2f-03f43ff66a47.jpeg)
+
+
+
+Aqui um video de apresentação do projeto:
+https://user-images.githubusercontent.com/83122773/175107052-b78ee78f-1565-4b1f-afaa-bccfeeb5dcdc.mp4
+
+
