@@ -1,108 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Modal } from 'react-native';
-import {AntDesign} from '@expo/vector-icons';
-import cores from './Cores';
-import dadosTemp from './dadosTemp';
-import TodoList from './componentes/TodoList';
-import AddListModal from './componentes/AddListModal';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import home from './home';
+import sobre from './sobre/Index';
 
+const Tab = createBottomTabNavigator();
 
-export default class App extends React.Component{
-  state = {
-    addTodoVisivel : false,
-    lists: dadosTemp
-  }
+export default function App() {
+  return(
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-  toggleAddTodoModal() {
-    this.setState({addTodoVisivel: !this.state.addTodoVisivel})
-  }
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'ios-information-circle'
+                : 'ios-information-circle-outline';
+            } else if (route.name === 'Sobre') {
+              iconName = focused ? 'logo-github' : 'logo-github';
+            }
 
-  renderList = list =>{
-    return <TodoList list={list} updateList={this.updateList} />
-  }
-
-  addList = list => {
-    this.setState({lists: [...this.state.lists, { ...list, id: this.state.lists.length + 1, todos: [] }] });
-  }
-
-  updateList = list => {
-    this.setState({
-      lists: this.state.lists.map(item => {
-        return item.id === list.id ? list : item
-      })
-    })
-  };
-
-  render(){
-    return (
-      <View style={styles.container}>
-        <Modal animationType='slide' visible={this.state.addTodoVisivel} onRequestClose={() => this.toggleAddTodoModal()}>
-          <AddListModal closeModal={() => this.toggleAddTodoModal()} addList={this.addList}/>
-        </Modal>
-        <View style={{flexDirection: "row"}}>
-          <View style={styles.divisor} />
-          <Text style={styles.titulo}>
-            ToDo <Text style={{fontWeight: "300", color: cores.azul}}>Lists</Text>
-          </Text>
-          <View style={styles.divisor} />
-        </View>
-
-        <View style={{marginVertical: 48}}>
-          <TouchableOpacity style={styles.addLista} onPress={() => this.toggleAddTodoModal()}>
-            <AntDesign name='plus' size={16} color={cores.azul}/>
-          </TouchableOpacity>
-
-          <Text style={styles.add}>Add Lista</Text>
-        </View>
-
-        <View style={{height: 275,  paddingHorizontal: 18, alignSelf: 'center'}}>
-          <FlatList 
-            data={this.state.lists} 
-            keyExtractor={item => item.name} 
-            horizontal={true} 
-            showsHorizontalScrollIndicator={false} 
-            renderItem={({item}) => this.renderList(item)}
-            keyboardShouldPersistTaps = "always"
-            />
-        </View>
-      </View>
-    );
-  }
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+        })}
+      >
+        <Tab.Screen name="Home" component={home} />
+        <Tab.Screen name="Sobre" component={sobre}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-  },
-  divisor: {
-    backgroundColor: cores.azulClaro,
-    height: 1,
-    flex: 1,
-    alignSelf: 'center'
-  },
-  titulo: {
-    fontSize: 38,
-    fontWeight: "800",
-    color: cores.preto,
-    paddingHorizontal: 64
-  },
-  addLista: {
-    borderWidth: 2,
-    borderColor: cores.azulClaro,
-    alignSelf: 'center',
-    borderRadius: 4,
-    padding: 16,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  add: {
-    color: cores.preto,
-    fontWeight: "600",
-    fontSize: 14,
-    marginTop: 8,
-    alignSelf: 'center',
-  }
-});
